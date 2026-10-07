@@ -1,0 +1,245 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\setstretch{1.08}
+
+\title{\textbf{Review of the Ph.D. Thesis}\\[4pt]
+\large ``Rational Design of ssPalmO-Based Lipid Nanoparticles for mRNA and Drug Delivery via Molecular Dynamics'' by Barange Anjana Narayanrao}
+\\[4pt]
+\normalsize \author{Review by Rochish Thaokar}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% \section*{Basis and scope of this review}
+% This review is based on the submitted thesis, with particular attention to the stated objectives, computational methodology, results, interpretation, conclusions, and the supporting information. The comments are written in the style of a Ph.D. thesis examiner: the appreciation points identify scientific strengths, while the questions are intended to test conceptual understanding, methodological judgement, physical interpretation, and the limits of the conclusions.
+
+\section*{Overall description of the thesis}
+
+The thesis develops a molecular-dynamics-based framework for understanding and rationally designing lipid bilayers containing ssPalmO-derived ionisable lipids for nucleic-acid and drug-delivery applications. The approximate organisation is: first, DFT/RESP-derived parameters and atomistic MD are used to establish the structural and dynamical behaviour of ssPalmO, ssPalmO-phe and ssPalmO-ben bilayer systems, including cis/trans isomerism; second, the influence of helper phospholipid chemistry is mapped systematically by varying PC versus PE headgroups, acyl-chain length, and saturation/unsaturation; and third, cholesterol is introduced into cis-ssPalmO-phe/helper-lipid bilayers to determine how cholesterol concentration modifies membrane condensation, dynamics, electrostatics, molecular orientation and local coordination. The thesis therefore moves from the intrinsic properties of the ionisable lipid to binary mixtures and finally to ternary membrane models. The main observables are bilayer thickness, packing density/area per lipid, lateral diffusion, electrostatic potential, deuterium order parameters, interaction energies, hydrogen bonding, cholesterol tilt and radial distribution functions.  
+
+\section{Chapter 1: Introduction}
+
+\subsection*{What the chapter does}
+
+Chapter 1 establishes the biological and physicochemical motivation for LNP-based delivery, reviews conventional lipid and non-lipid nanocarriers, and then focuses on the four-component architecture of nucleic-acid LNPs. It introduces the ssPalm family and, in particular, ssPalmO, ssPalmO-phe and ssPalmO-ben, emphasizing their pH-responsive and redox/self-degradable characteristics. The chapter then reviews experimental LNP characterization and computational approaches, including DFT, atomistic MD, coarse-grained MD and Monte Carlo methods. It identifies the molecular-level structure--function gap and formulates four objectives: force-field development/validation, characterization of pure ssPalmO systems, systematic investigation of helper lipids, and investigation of cholesterol-containing ternary systems.
+\begin{itemize}[leftmargin=*]
+\item The chapter provides a logical progression from the general problem of nucleic-acid delivery to the specific chemical system studied in the thesis.
+\item The distinction between ionisable lipid, helper phospholipid, cholesterol and PEG-lipid is clearly established, making the later compositional studies easy to follow.
+\item The motivation for atomistic simulation is well articulated: experiments provide valuable structural observables, whereas molecular simulation can provide molecular-level interaction and conformational information.
+\item The selection of cis/trans ssPalmO-phe and ssPalmO-ben gives the thesis a useful structure--property comparison rather than treating ssPalmO-phe as an isolated molecule.
+\item The objectives are sufficiently concrete to permit a direct mapping between the thesis questions and Chapters 3--5.
+\end{itemize}
+
+\subsection*{My specific questions are:}
+
+\begin{enumerate}[leftmargin=*]
+\item What is the precise scientific hypothesis of the thesis, as opposed to the broader objective of ``rational LNP design''?
+\item Why was an atomistic bilayer selected as the principal model rather than a complete LNP containing mRNA, PEG-lipid and all four components?
+\item The thesis emphasizes endosomal escape. Which of the calculated observables can actually be considered mechanistically connected to endosomal escape, and which are only indirect descriptors?
+\item Why is cis-ssPalmO-phe selected as the principal ionisable lipid for the later chapters rather than trans-ssPalmO-phe or ssPalmO-ben?
+\item What is the physical significance of the HyPER degradation mechanism for the membrane properties studied here? Is degradation itself actually simulated?
+\item The thesis repeatedly uses ``optimal'' formulation. What objective function or quantitative criterion defines optimality?
+\item How does the bilayer model differ structurally from an actual LNP, which is not necessarily a simple planar bilayer?
+\item Why is PEG-lipid excluded from the simulation even though it is identified as an important fourth component of LNPs?
+\item What is the most important limitation of inferring LNP performance from bilayer properties such as thickness, diffusion and order parameter?
+\item Why are both PC and PE helper lipids necessary for the scientific question? What independent variable is being isolated by comparing them?
+\item What evidence supports the statement that atomistic simulation data for ssPalmO variants were absent before this work?
+\item If you had to reduce the thesis to one falsifiable structure--property relationship, what would it be and how would you experimentally test it?
+\end{enumerate}
+
+\section{Chapter 2: Methods}
+
+Chapter 2 describes the quantum-chemical parameterization, force-field construction, atomistic MD workflow, simulation ensembles, periodic boundary conditions, constraints, electrostatics, trajectory analysis, umbrella sampling and validation strategy. DFT calculations are used for geometry optimization and RESP charges, while GROMOS53a6 is used for lipid components. Bilayers contain 150 lipids in Chapter 3 and 200 lipids in Chapters 4--5 and are simulated at approximately physiological temperature and pressure. The chapter also describes steered MD and umbrella sampling to obtain helper-lipid desorption PMFs, followed by WHAM reconstruction and bootstrap uncertainty estimates.
+
+\subsection*{Appreciation}
+
+\begin{itemize}[leftmargin=*]
+\item The methodological chapter is unusually explicit about simulation parameters, including system size, cutoffs, PME settings, constraints, equilibration and analysis windows.
+\item The thesis recognizes that the ssPalmO molecules require dedicated parameterization rather than blind use of a standard lipid library.
+\item The use of multiple observables---structural, dynamical, electrostatic and energetic---is appropriate for a structure--property study.
+\item The use of umbrella sampling for helper-lipid removal is scientifically motivated because spontaneous desorption may not occur on ordinary MD timescales.
+\item The thesis explicitly discusses limitations such as finite-size effects, fixed-charge force fields and incomplete sampling, which is an important strength for an examiner.
+\end{itemize}
+
+\subsection*{Examiner questions}
+
+\begin{enumerate}[leftmargin=*]
+\item Why was GROMOS53a6 selected for the phospholipids and cholesterol instead of CHARMM36 or another membrane force field?
+\item The thesis uses DFT/RESP charges. Why is RESP appropriate for a lipid whose electrostatic environment is strongly altered by a membrane and water?
+\item What is the justification for using gas-phase DFT/RESP charges for a molecule that will ultimately reside in a polar, heterogeneous membrane environment?
+\item How were the torsional parameters of the unusual ssPalmO functional groups actually validated? Which torsions are most important for the cis/trans conformational behaviour?
+\item There are apparent differences between the stated DFT/RESP protocols in different parts of Chapter 2. Can you reconcile the B3LYP-D3BJ/6-311+G(d,p) description with the HF/6-31G* RESP and MP2 torsional-scan description?
+\item Why are production simulations performed with a Berendsen thermostat in parts of the methodology? What are the consequences of the Berendsen thermostat for the correct NPT fluctuation ensemble?
+\item What is the justification for the choice of 303.15 K in the main simulations and 310 K in the umbrella-sampling calculations? Could this difference affect the PMFs?
+\item How did you demonstrate that 500 ns is sufficient for the quantities reported? Why is block averaging of the final 100 ns sufficient evidence of equilibrium rather than merely stationarity?
+\item What is the expected finite-size effect on lateral diffusion, and is a 75--100 lipid-per-leaflet system large enough for reliable diffusion coefficients?
+\item How were the two independent replicates generated? Were they independently equilibrated from distinct configurations or merely continued trajectories?
+\item In umbrella sampling, how was overlap between adjacent windows quantified? Is visual overlap of histograms sufficient to establish convergence of the PMF?
+\item Why is the well depth of a one-dimensional COM PMF interpreted directly as the helper-lipid binding free energy? What entropic contributions are omitted by constraining the reaction coordinate to the bilayer normal?
+\end{enumerate}
+
+\section{Chapter 3: Structural Stability and Dynamics of Pure ssPalmO-Based Lipid Bilayers}
+
+\subsection*{What the chapter does}
+
+Chapter 3 establishes the baseline behaviour of ssPalmO, ssPalmO-phe and ssPalmO-ben and their cis/trans forms using atomistic MD. Bilayer thickness, diffusion, packing density, electrostatic potential and acyl-chain order are compared. The chapter reports stable bilayers for the studied derivatives, while cis-ssPalmO is reported to be highly flexible and non-lamellar. The trans forms of ssPalmO-phe and ssPalmO-ben exhibit larger thickness and packing density than their cis forms. Aromatic ester derivatives have lower diffusion than parent ssPalmO. The chapter also reports that adding DOPC changes the thickness, packing, electrostatic potential and dynamics of cis-ssPalmO-phe. DFT-derived electronic descriptors are additionally used to relate cis/trans differences to electronic softness and polarizability.
+
+\subsection*{Appreciation}
+
+\begin{itemize}[leftmargin=*]
+\item The chapter provides a necessary baseline before introducing compositional complexity in the subsequent chapters.
+\item The cis/trans comparison is scientifically useful because it connects molecular geometry with emergent bilayer properties.
+\item The study combines several observables rather than relying only on visual inspection of trajectories.
+\item The non-lamellar behaviour of cis-ssPalmO is an interesting result because it highlights that apparently small chemical or stereochemical changes can alter self-organization.
+\item The chapter proposes experimentally testable validation routes through SAXS/SANS, $^2$H NMR and diffusion measurements.
+\end{itemize}
+
+\subsection*{Examiner questions}
+
+\begin{enumerate}[leftmargin=*]
+\item How do you distinguish a genuinely stable bilayer from a metastable structure that simply survives for 500 ns?
+\item What is the physical origin of the different thickness and packing density between cis- and trans-ssPalmO-phe?
+\item The thesis attributes the difference mainly to intramolecular chain distances. How can you demonstrate causality rather than correlation between chain distance and bilayer thickness?
+\item Why does cis-ssPalmO, but not the ester derivatives, lose its lamellar structure? What molecular interaction changes are responsible?
+\item Why is the lateral diffusion of ssPalmO-phe and ssPalmO-ben lower than that of ssPalmO? Can the effect be separated into aromatic-ring sterics, chain length, packing and force-field effects?
+\item The thesis states that intermolecular distances are shorter than intramolecular distances and interprets this as stronger intermolecular interactions. Is geometric distance alone sufficient to establish interaction strength?
+\item How reliable is the electrostatic potential difference across a membrane when calculated with a fixed-charge force field and a particular choice of electrostatic reference plane?
+\item Why does addition of DOPC increase the reported electrostatic potential difference to approximately 0.93 V? What microscopic charge rearrangement produces this change?
+\item What is the physical meaning of the reported ``packing density'' and how is it related to the more conventional area-per-lipid observable?
+\item The trans isomer has a smaller DFT band gap and lower chemical hardness. Why should this electronic descriptor influence bilayer packing in a classical MD simulation where the charges are fixed?
+\item Could the apparent cis/trans difference arise partly from differences in the initial configurations or insufficient conformational sampling rather than intrinsic thermodynamics?
+\item What single experiment would most decisively test the central Chapter 3 prediction, and what result would falsify your interpretation?
+\end{enumerate}
+
+\section{Chapter 4: Effect of Helper Lipids on the Stability and Fusogenic Properties of ssPalmO-Based Lipid Bilayers}
+
+\subsection*{What the chapter does}
+
+Chapter 4 systematically varies helper-lipid chemistry in cis-ssPalmO-phe mixed bilayers. PC and PE headgroups are compared, while acyl-chain length and saturation are varied from C14 to C24. Twenty compositions are simulated and structural, dynamical, electrostatic and free-energy descriptors are compared. A 40 mol\% DOPC composition is identified by the thesis as a balance between thickness, packing, diffusion, electrostatic potential and PMF. PC-containing systems generally show thinner and more mobile membranes with negative potentials, whereas PE-containing systems are thicker, more compact and generally more positive. Saturation and chain length affect order and binding, while unsaturation increases lateral mobility. Umbrella sampling is used to estimate helper-lipid removal PMFs.
+
+\subsection*{Appreciation}
+
+\begin{itemize}[leftmargin=*]
+\item The systematic variation of headgroup, chain length and unsaturation is one of the strongest aspects of the thesis and provides a useful structure--property matrix.
+\item The chapter goes beyond the common binary PC-versus-PE comparison and examines a substantial homologous series.
+\item The combination of equilibrium properties with PMF calculations adds an energetic dimension to the analysis.
+\item The chapter makes a useful distinction between bilayer-level physicochemical optimization and direct prediction of transfection, explicitly noting that the latter has not been simulated.
+\item The resulting framework suggests experimentally testable hypotheses about how helper-lipid chemistry can tune stability versus membrane responsiveness.
+\end{itemize}
+
+\subsection*{Examiner questions}
+
+\begin{enumerate}[leftmargin=*]
+\item What exactly is meant by ``fusogenic'' in this chapter? Did the simulations actually calculate a fusion event or a membrane-curvature transition?
+\item Why is 40 mol\% DOPC called optimal? Can you define a quantitative objective function that combines thickness, diffusion, packing, electrostatic potential and PMF?
+\item If several observables are optimized simultaneously, how were their relative weights selected? Could a different weighting produce a different ``optimal'' composition?
+\item Why does increasing DOPC content eventually produce excessive rigidity according to the thesis, when DOPC is generally regarded as a fluid unsaturated phospholipid?
+\item How do you reconcile the reported DOPC diffusion trends with the statement that high DOPC compositions become excessively rigid?
+\item Why do PE-containing bilayers show higher packing density despite some of the PE systems having lower packing density numerically than PC systems at comparable chain composition?
+\item The chapter associates PE with negative curvature and fusogenicity. How was membrane curvature actually measured in the simulations?
+\item Is a more negative PMF necessarily evidence for better LNP stability in the biological sense? What is the difference between helper-lipid retention and successful intracellular delivery?
+\item The PMF is calculated by pulling a single helper lipid. How representative is the free energy of removing one molecule of a multicomponent membrane?
+\item Why do some longer-chain unsaturated lipids show substantially more favorable binding energies than shorter-chain saturated lipids? What molecular contacts dominate the PMF?
+\item Could the large PMF values partly reflect the chosen reference state, reaction coordinate, or finite simulation box rather than an intrinsic binding property?
+\item How would you experimentally distinguish the prediction that PE improves endosomal escape from the alternative explanation that PE simply changes particle morphology or uptake?
+\end{enumerate}
+
+\section{Chapter 5: Cholesterol-Induced Structural Condensation and Orientation Homogenization}
+
+\subsection*{What the chapter does}
+
+Chapter 5 adds cholesterol to cis-ssPalmO-phe bilayers containing DSPC, DSPE, DOPC or DOPE. Two cholesterol compositions are compared: 10\% and 40\%, with the ionisable lipid fraction held at 50\%. The study examines thickness, lateral diffusion, packing density, electrostatic potential, chain order, interaction energies, hydrogen bonding, cholesterol tilt and RDFs. Increasing cholesterol consistently thickens and compacts the bilayers and reduces lateral diffusion. Cholesterol also narrows its tilt-angle distribution and drives convergence of chain-order profiles across chemically distinct helper-lipid environments. Interaction-energy and RDF analyses are used to propose that cholesterol--cis-ssPalmO interactions become dominant at high cholesterol content. Importantly, the chapter itself acknowledges that only two concentrations were studied and that some of the mechanistic interpretation remains correlational.
+
+\subsection*{Appreciation}
+
+\begin{itemize}[leftmargin=*]
+\item The chapter extends the binary membrane analysis into a ternary system while retaining the same central ionisable lipid, creating a coherent progression through the thesis.
+\item The use of multiple independent descriptors---thickness, packing, diffusion, SCD, tilt, interaction energies, hydrogen bonds and RDFs---provides mutually reinforcing evidence for cholesterol-induced condensation.
+\item The observed convergence of cholesterol orientation and lipid-chain order across different helper-lipid environments is an interesting and potentially publishable mechanistic observation.
+\item The distinction between headgroup-controlled electrostatic polarity and cholesterol-controlled magnitude is a useful conceptual separation.
+\item The discussion is commendably self-critical: it explicitly identifies the need for intermediate cholesterol concentrations, domain analysis, leaflet-crossing analysis and spatially resolved energetics.
+\end{itemize}
+
+\subsection*{Examiner questions}
+
+\begin{enumerate}[leftmargin=*]
+\item Why were only 10\% and 40\% cholesterol selected? What evidence suggests that these two points are sufficient to identify a transition rather than merely two endpoints?
+\item How can you establish whether the apparent ``orientation homogenization'' is a continuous crossover or a threshold phenomenon?
+\item At 40\% cholesterol, the phospholipid fraction is reduced fourfold. How much of the change in total interaction energy is simply a consequence of changing the number of interacting molecules rather than stronger pairwise interactions?
+\item The thesis uses total group-summed interaction energies. Would energies normalized per cholesterol, per ssPalmO-phe molecule, or per contacting pair lead to the same mechanistic conclusion?
+\item How do you distinguish cholesterol self-organization from simple excluded-volume packing or concentration-driven spatial homogenization?
+\item The cholesterol--cholesterol RDF peak becomes lower and broader at higher cholesterol. Why does a lower RDF peak not necessarily mean weaker cholesterol--cholesterol interaction?
+\item What additional analysis would most directly establish the proposed transition from sparse cholesterol clustering to homogeneous mixing?
+\item Why does the cholesterol tilt-angle convergence occur much more strongly in the upper leaflet than the lower leaflet? Could this reflect a sampling, initial-condition or asymmetry artefact?
+\item The hydrogen-bond analysis uses a geometric criterion. How sensitive are the conclusions to the donor--acceptor distance and angular cutoffs?
+\item The thesis interprets transient cholesterol--water hydrogen-bond excursions as possible interfacial exposure but acknowledges that flip-flop was not measured. What analysis would definitively distinguish interfacial exposure from leaflet crossing?
+\item How might the use of the SPC water model and a non-polarizable force field influence the hydrogen-bond and electrostatic-potential results?
+\item If you could perform only three additional simulations or analyses to strengthen Chapter 5, what would they be and why?
+\end{enumerate}
+
+\section{Chapter 6: Conclusions and Future Scope}
+
+\subsection*{What the chapter does}
+
+Chapter 6 integrates the three working chapters into a hierarchical design framework. Chapter 3 identifies the structural consequences of ssPalmO chemistry and cis/trans configuration; Chapter 4 maps helper-lipid effects; and Chapter 5 adds cholesterol as a third compositional control variable. The chapter argues that membrane properties relevant to stability, circulation and intracellular membrane remodeling can be tuned by ionisable-lipid chemistry, helper-lipid identity and cholesterol fraction. It also identifies future directions, including experimental validation and extensions of the computational framework.
+
+\subsection*{Appreciation}
+
+\begin{itemize}[leftmargin=*]
+\item The conclusion successfully returns to the hierarchical design logic introduced in Chapter 1.
+\item The thesis produces a coherent sequence of increasingly complex membrane models rather than three disconnected computational studies.
+\item The chapter distinguishes experimentally testable hypotheses from established conclusions, particularly for the cholesterol study.
+\item The proposed experimental validation routes---SAXS/SANS, NMR, FRAP and related measurements---are appropriate to the quantities calculated.
+\item The thesis demonstrates a credible transition from molecular descriptors to formulation hypotheses while acknowledging that direct transfection and in-vivo performance were not calculated.
+\end{itemize}
+
+\subsection*{Examiner questions}
+
+\begin{enumerate}[leftmargin=*]
+\item What is the single most important original scientific contribution of the thesis?
+\item Which of the four objectives stated in Chapter 1 has been most completely achieved, and which remains least directly demonstrated?
+\item What is genuinely ``rational'' about the proposed design framework, as opposed to a systematic but still descriptive survey of compositions?
+\item Can the framework predict a new ssPalmO formulation that was not explicitly simulated? If yes, what inputs and rules would be used?
+\item Which thesis conclusion is supported most strongly by the simulations, and which conclusion depends most heavily on interpretation?
+\item How would you experimentally validate the proposed 40 mol\% DOPC optimum without measuring transfection alone?
+\item How would you test whether the predicted PC/PE differences persist in an actual nanoparticle rather than a planar bilayer?
+\item What is the consequence of not simulating PEG-lipid, mRNA cargo, protonation changes and endosomal pH?
+\item Does the thesis demonstrate ``mRNA and drug delivery,'' or does it demonstrate membrane properties relevant to those applications? Explain the distinction.
+\item What is the most important limitation of using a neutral, fixed-charge representation of the ionisable lipid for a system whose biological function depends strongly on pH-dependent protonation?
+\item If computational resources were unlimited, what would the next multiscale simulation be: full LNP self-assembly, explicit mRNA encapsulation, pH-triggered membrane remodeling, membrane fusion, or something else? What scientific question would it answer?
+\item Which conclusion would you be willing to withdraw or weaken if an experimental SAXS/NMR/FRAP study disagreed with the simulation?
+\end{enumerate}
+
+\section*{Cross-cutting examiner observations}
+
+Beyond the chapter-specific questions, the following issues are particularly suitable for a Ph.D. viva because they test whether the candidate understands the boundary between a simulation result and a biological or formulation conclusion.
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Bilayer versus LNP:} The simulations provide detailed membrane-level information, but a real LNP has curvature, heterogeneous internal morphology, nucleic-acid cargo, PEG-lipid, ionisation equilibria and potentially non-bilayer phases. The candidate should be able to state precisely which conclusions survive this scale transition.
+\item \textbf{Neutral ionisable lipid:} The main simulations use neutral ssPalmO-derived lipids. The candidate should explain how this affects the interpretation of electrostatics, cargo association and endosomal behaviour, and why the neutral state is appropriate for the particular structural question.
+\item \textbf{Force-field uncertainty:} Agreement with analogous lipids is useful but is not equivalent to direct validation of ssPalmO. The candidate should distinguish validation, plausibility and prediction.
+\item \textbf{Thermodynamics versus kinetics:} Thickness, packing, diffusion and PMF are not interchangeable. A membrane can be thermodynamically stable but kinetically slow, or dynamically fluid but still strongly bound in a particular coordinate.
+\item \textbf{Meaning of ``optimal'':} The 40 mol\% DOPC result is a useful formulation hypothesis, but an examiner should ask how an optimum is mathematically defined and whether it remains optimal under alternative weighting of the measured descriptors.
+\item \textbf{Causality:} Many correlations in the thesis are physically plausible and mutually consistent, but the strongest mechanistic claims would benefit from perturbation studies or additional simulations that isolate individual interactions.
+\item \textbf{Cholesterol concentration:} Two concentrations establish a contrast, not a complete concentration-response relationship. Intermediate concentrations would be necessary to locate a transition or identify a threshold.
+\item \textbf{Energetic normalization:} Total pairwise interaction energies change automatically when component mole fractions change. Per-molecule or per-contact normalization is therefore important when interpreting claims about strengthened interactions.
+\item \textbf{Experimental validation:} The thesis provides a strong basis for validation using SAXS/SANS, $^2$H NMR, FRAP and related techniques. Such validation would substantially strengthen the connection between the computational framework and formulation design.
+\end{itemize}
+
+\section*{Overall examiner-style assessment}
+
+The thesis presents a coherent computational investigation of ssPalmO-derived lipid membranes and develops a progressively more complex structure--property framework from pure ionisable lipids to binary helper-lipid mixtures and ternary cholesterol-containing systems. Its strongest contribution is the systematic atomistic mapping of how lipid chemistry and composition affect membrane structure, dynamics and interactions in a chemically distinctive ssPalmO platform. The work is particularly strong in its breadth of molecular descriptors and in the systematic treatment of helper-lipid chain architecture.
+
+The main points an examiner is likely to probe are not the existence of the reported trends, but the strength of the mechanistic and translational inferences drawn from them. In particular, the candidate should be prepared to defend the force-field parameterisation and validation strategy, the sampling/convergence criteria, the interpretation of PMFs, the definition of an ``optimal'' formulation, the use of planar neutral bilayers as a model for LNPs, and the mechanistic interpretation of the cholesterol results. The thesis itself usefully acknowledges several of these limitations, which should make the viva discussion scientifically productive.
+
+\end{document}

@@ -1,0 +1,89 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{bm}
+\usepackage{enumitem}
+
+\title{\textbf{Summary of Electrohydrodynamic Droplet Dynamics \\ and Capture Mechanics}}
+\author{\textbf{Technical Reference Document}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}[label=\textbf{Equation \arabic* ---}, itemsep=1.5em, leftmargin=*]
+
+  \item \textbf{Droplet Evaporation Timescale vs. Capture Timescale:}
+  \begin{equation}
+  t_{\text{evap}} = \frac{D_1^2}{K}, \quad K = \frac{8 D_v \Delta c}{\rho_w}, \quad \frac{t_{\text{evap}}}{t_{\text{capture}}} \approx 258
+  \end{equation}
+  \textit{Where:} $D_v = 2.42 \times 10^{-5} \, \text{m}^2/\text{s}$, $\rho_w = 1000 \, \text{kg/m}^3$, $\Delta c \approx 0.0303 \, \text{kg/m}^3$, $K \approx 6 \times 10^{-9} \, \text{m}^2/\text{s}$.
+
+  \item \textbf{Pair-Mobility Tensor Hydrodynamic Formulation:}
+  \begin{equation}
+  \begin{bmatrix} \mathbf{U}_1 \\ \mathbf{U}_2 \end{bmatrix} = \begin{bmatrix} \boldsymbol{\omega}_{11} & \boldsymbol{\omega}_{12} \\ \boldsymbol{\omega}_{21} & \boldsymbol{\omega}_{22} \end{bmatrix} \cdot \begin{bmatrix} \mathbf{F}_{1,\text{ext}} + \mathbf{F}_{12} \\ \mathbf{F}_{2,\text{ext}} + \mathbf{F}_{21} \end{bmatrix}
+  \end{equation}
+  \textit{Where:} $\boldsymbol{\omega}_{ij}$ are two-body mobility tensors (Jeffrey \& Onishi 1984), and $\mathbf{F}_{12} = -\mathbf{F}_{21}$ is the inter-particle electrostatic force.
+
+  \item \textbf{Cunningham Slip Correction Factor \& Knudsen Number:}
+  \begin{equation}
+  C_c = 1 + \alpha Kn, \quad \alpha = A + B e^{\left(-\frac{C}{Kn}\right)}, \quad Kn = \frac{\lambda}{R} = \frac{2\lambda}{D}
+  \end{equation}
+  \textit{Where:} $\lambda = 66 \, \text{nm}$ (air at $101 \, \text{kPa}, 293 \, \text{K}$), $A = 1.257$, $B = 0.400$, and $C = 1.100$.
+
+  \item \textbf{Relative Trajectory Differential Equation:}
+  \begin{equation}
+  \frac{d r^*}{d \theta} = r^* \frac{U_{\text{rel},r}^*}{U_{\text{rel},\theta}^*}
+  \end{equation}
+  \textit{Where:} $r^* = r / R_c$ is the dimensionless separation distance scaled by capture radius $R_c = (D_1 + D_2)/2$.
+
+  \item \textbf{Rayleigh Charge Limit for Electrospray Droplet:}
+  \begin{equation}
+  Q_R = \sqrt{8 \pi^2 \epsilon_0 \gamma D_1^3} = 8 \pi \sqrt{\epsilon_0 \gamma R_1^3}
+  \end{equation}
+  \textit{Where:} $\epsilon_0 = 8.854 \times 10^{-12} \, \text{F/m}$, and $\gamma$ is the liquid surface tension ($\text{N/m}$).
+
+  \item \textbf{Exact Lekner Electrostatic Force Expansion (Finite Spheres):}
+  \begin{equation}
+  \begin{aligned}
+  F_{12} = -\frac{1}{4\pi\epsilon_0} \left[ \frac{Q_1 Q_2}{r^2} \right. &+ \frac{2(Q_1^2 R_2^3 + Q_2^2 R_1^3)}{r^5} + \frac{3(Q_1^2 R_2^5 + Q_2^2 R_1^5)}{r^7} \\
+  &+\left. \frac{14 Q_1 Q_2 R_1^3 R_2^3}{r^8} - \frac{4(Q_1^2 R_2^7 + Q_2^2 R_1^7)}{r^9} \right]
+  \end{aligned}
+  \end{equation}
+  \textit{Where:} Includes Coulombic ($r^{-2}$), Dielectrophoretic DEP ($r^{-5}$), and higher multipole terms up to $r^{-9}$.
+
+  \item \textbf{Single Droplet Capture Efficiency \& Capture Kernel:}
+  \begin{equation}
+  \eta(D_1, D_2) = \frac{b_{\text{max}}^2}{R_c^2}, \quad K(D_1, D_2) = \frac{\pi}{4} (D_1 + D_2)^2 U_\infty \eta(D_1, D_2)
+  \end{equation}
+  \textit{Where:} $b_{\text{max}}$ is the critical capture impact parameter, $R_c = (D_1 + D_2)/2$, and $U_\infty$ is the approach velocity.
+
+  \item \textbf{Universal Peak Capture Efficiency Scaling Law:}
+  \begin{equation}
+  \eta_{\text{max}} = \left( \frac{5 \pi f^2 \sigma}{8 \mu_a U_\infty} \right)^{\frac{2}{5}}
+  \end{equation}
+  \textit{Where:} $f = Q_1 / Q_R$ (Rayleigh fraction), $\sigma$ is surface tension, and $\mu_a$ is air dynamic viscosity.
+
+  \item \textbf{Semi-Theoretical Crossover Droplet Diameter Model:}
+  \begin{equation}
+  d_{\text{max}} \approx \left( \frac{6 \sqrt{8 \epsilon_0 \gamma}}{\rho_c} \right)^{\frac{2}{3}}, \quad \text{where } \rho_c = \frac{I}{Q_f}
+  \end{equation}
+  \textit{Where:} $I$ is measured electrospray current, $Q_f$ is liquid volumetric flow rate, and $\rho_c$ is volumetric charge density.
+
+  \item \textbf{Liquid Consumption Effectiveness Factor (LCEF) \& CADR:}
+  \begin{equation}
+  \text{LCEF} = \frac{\text{CADR}}{Q_f}, \quad \text{CADR} = V \cdot \lambda = \frac{V}{\tau}
+  \end{equation}
+  \textit{Where:} $V$ is chamber volume, $\lambda$ is exponential aerosol decay constant, and $\tau = 1/\lambda$ is mean particle lifetime.
+
+  \item \textbf{Modified Boltzmann Equilibrium Bipolar Charging Distribution:}
+  \begin{equation}
+  N(q) = N_0 \frac{\exp\left( -\frac{q^2 e^2}{2 \pi \epsilon_0 D_2 k_B T} \right)}{\sum_{k=-\infty}^{\infty} \exp\left( -\frac{k^2 e^2}{2 \pi \epsilon_0 D_2 k_B T} \right)}
+  \end{equation}
+  \textit{Where:} $q$ is elementary charge number, $e = 1.602 \times 10^{-19} \, \text{C}$, $k_B$ is Boltzmann constant, and $T$ is absolute temperature.
+
+\end{enumerate}
+
+\end{document}
